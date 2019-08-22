@@ -1,0 +1,13 @@
+lib: doubler.o tripler.o
+	ar r libmultiplier.a doubler.o tripler.o
+	cp libmultiplier.a ~/CIS_330/multiplier/lib
+	cp multiplier.h ~/CIS_330/multiplier/include
+
+doubler.o: doubler.c
+	gcc -c doubler.c
+
+tripler.o: tripler.c
+	gcc -c tripler.c
+
+
+
