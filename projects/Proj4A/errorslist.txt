@@ -1,0 +1,52 @@
+Luke Donnelly
+CIS 330
+Project 4A
+
+p1.c:
+
+In project p1.c there are 2 errors. 
+
+The 1st error occurs at line 20. The error is an array bounds write. 
+An infinite loop occurs at line 18, because the loop terminating condition 
+is i < h, instead of j < h. Variable j keeps increasing and 
+eventually writes out of the bounds of buffer. 
+
+The second error occurs at line 33. The error is an free memory read error.
+In the for loop at line 26. The loop assigns buffer2 to point at the address
+locations of buffer, the at line 30, buffer is freed. Now buffer2 is points
+at freed memory. In line 33, the program performs a read from buffer2 
+and thus creates the error.
+
+p2.c:
+
+In project p2.c there are 6 errors. 
+
+The 1st error occurs at line 13 and is an array bounds read error. Program
+tries to assign var a value outside the array bounds. 
+
+The 2nd error occurs at line 21 and is a freeing unallocated memory error.
+This is because the program freed ptr before at line 20. 
+
+The 3rd error occurs at line 28.The error is a freeing non-heap memory error. 
+array is initialized on the stack at line 23.
+
+The 4th error occurs at line 31. The error is a NULL pointer read error. 
+ptr1 at line 30 is assigned to NULL and the is read at line 31. 
+
+The 5th error occurs at line 32. The error is a NULL pointer write error. 
+ptr1 still has the value of NULL at line 32 where it is assigned the value
+'Q'. 
+
+The 6th error occurs at line 36 and is an array bounds read error.
+The program tries to read a value outside the bounds of ptr3. 
+
+
+p3.c:
+
+
+
+
+
+
+
+
