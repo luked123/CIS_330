@@ -4,7 +4,7 @@ Project 4A
 
 p1.c:
 
-In project p1.c there are 2 errors. 
+In p1.c there are 2 errors. 
 
 The 1st error occurs at line 20. The error is an array bounds write. 
 An infinite loop occurs at line 18, because the loop terminating condition 
@@ -19,7 +19,7 @@ and thus creates the error.
 
 p2.c:
 
-In project p2.c there are 6 errors. 
+In p2.c there are 6 errors. 
 
 The 1st error occurs at line 13 and is an array bounds read error. Program
 tries to assign var a value outside the array bounds. 
@@ -43,7 +43,26 @@ The program tries to read a value outside the bounds of ptr3.
 
 p3.c:
 
+In p3.c there are three errors
 
+The 1st error occurs at line 58. The program tries to perform a free memory
+read. This happens because the program frees memory at line 44, which contains
+the value for answer. 
+
+The 2nd error occurs at line 26. The program tries to perform an array bounds
+read. The program doesn't check if we are stepping past the start of the
+pointer we are reading, and so will read garbage data. This conitributes to
+the garbage answer we see. 
+
+The 3rd error occurs at line 59. The program tries to free unallocated memory.
+The program freed the memory at line 44, and tries to do this again. 
+
+Besides the memory errors, there are several other problems with this code. As
+mentioned before the program doesn't check if we are still in bound of the
+shorter operand. The remainder variable is never reset, and thus produces the
+wrong number past the 3rd iteration in the loop and onward. There is repeat
+code at line 31. I fixed the code in p3fixed.c and produces the correct
+answer with no memory errors. Could be cleaned up alot. 
 
 
 
