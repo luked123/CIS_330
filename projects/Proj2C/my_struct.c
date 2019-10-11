@@ -72,5 +72,5 @@ void GetTriangleBoundingBox(Triangle *tri, double *bbox){
     bbox[0] = tri->pt1X;
     bbox[1] = tri->pt2X;
     bbox[2] = tri->minY;
-    bbox[3] = tri->maxY; 
+    bbox[3] = tri->maxY;
 }
