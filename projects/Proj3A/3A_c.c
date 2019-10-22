@@ -8,6 +8,7 @@ typedef struct Pixel{
   unsigned char b;
 } Pixel;
 
+// Structure of a PNM image. Format is described in http://netpbm.sourceforge.net/doc/ppm.html
 typedef struct Image{
   char magicnumber[128];
   int width;
@@ -16,21 +17,23 @@ typedef struct Image{
   Pixel *pixel;
 } Image;
 
+// Reads in a PNM image and returns a image struct.
 Image *ReadImage(char *filename)
 {
   FILE *f_in;
-  int buffer_size;
-  int *buffer;
   Image *image;
 
   image = (Image *) malloc(sizeof(Image));
 
   f_in = fopen(filename, "rb");
 
+  // Reading the header for the PNM image into the image struct.
   fscanf(f_in, "%s\n%d %d\n%d\n", image->magicnumber, &(image->width), &(image->height), &(image->maxval));
 
+  // Allocating appropriate space for the pixel data. 
   image->pixel = (Pixel *) malloc(sizeof(Pixel) * image->width * image->height);
 
+  // Reading in the pixel data into the image struct.
   for(int i = 0; i < image->height; i++){
     for(int j = 0; j < image->width; j++){
       fread(&(image->pixel[i * image->width + j].r), 1, 1, f_in);
@@ -44,7 +47,7 @@ Image *ReadImage(char *filename)
   return image;
 }
 
-
+// Writes out the image to a file.
 void WriteImage(Image *image, char *filename)
 {
   FILE *f_out;
@@ -65,7 +68,7 @@ void WriteImage(Image *image, char *filename)
   fclose(f_out);
 }
 
-
+// Copys and returns an image.
 Image *CopyImage(Image *input)
 {
   Image *copy;
@@ -73,6 +76,7 @@ Image *CopyImage(Image *input)
   copy = (Image *) malloc(sizeof(Image));
   copy->pixel = (Pixel *) malloc(sizeof(Pixel) * input->width * input->height);
 
+  // Copy original data to copy
   strcpy(copy->magicnumber, input->magicnumber);
   copy->width = input->width;
   copy->height = input->height;
@@ -88,13 +92,14 @@ Image *CopyImage(Image *input)
   return copy;
 }
 
-
+// Creates a yellow diagnol line through the image.
 Image *YellowDiagonal(Image *input)
 {
   Image *newImage;
 
   newImage = CopyImage(input);
 
+  // Diagnol is where pixel i = pixel j.
   for(int i = 0; i < newImage->height; i++){
     for(int j = 0; j < newImage->width; j++){
       if(i == j){
@@ -114,12 +119,12 @@ void FreeImage(Image *image){
     free(image);
 }
 
-
+/* Read an image, apply yellow diagonal to it, then write */
 int main(int argc, char *argv[])
 {
   Image *image;
   Image *manipulated;
-   /* Read an image, apply yellow diagonal to it, then write */
+
   image = ReadImage(argv[1]);
   manipulated = YellowDiagonal(image);
 
